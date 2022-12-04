@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-lg">
+        <h3>ACCOUNT SUMMARY</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product["symbol"]}}</td>
+                    <td>{{ product["sum_shares"]}}</td>
+                    <td>{{ product["price"] | usd }}</td>
+                    <td>{{ (product["sum_shares"] * product["price"]) | usd }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CASH</td>
+                    <td> <strong>{{user_balance | usd}}</strong></td>
+
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <td colspan="2"> </td>
+                <td> <strong>Grand TOTAL</strong></td>
+                <td> <strong>{{ total | usd }}</strong></td>
+
+            </tfoot>
+
+        </table>
+    </div>
+
+{% endblock %}
